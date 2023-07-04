@@ -18,11 +18,11 @@ const Welcome = ({ api }) => {
     api
       .fetchLearner(text)
       .then((res) => {
-        console.log("Received Learner:",res);
+        console.log("Received Learner:", res);
         setLearnerResult(res);
       })
       .catch((e) => {
-        console.log("Error fetching Learner: ",e);
+        console.log("Error fetching Learner: ", e);
         setLearnerResult('No results found...');
       });
   }
@@ -31,17 +31,27 @@ const Welcome = ({ api }) => {
     api
       .fetchClassBatch(text)
       .then((res) => {
-        console.log("Received ClassBatch:",res);
+        console.log("Received ClassBatch:", res);
         setClassBatchResult(res);
       })
       .catch((e) => {
-        console.log("Error fetching ClassBatch: ",e);
+        console.log("Error fetching ClassBatch: ", e);
         setClassBatchResult('No results found...');
       });
   }
 
   return (
     <div className="App">
+      <div>
+        <Link
+          to={{
+            pathname: `/alllearners/`,
+          }}
+        >
+          <button type="button">View all learners</button>
+        </Link>
+
+      </div>
       <div>
         <p>
           Find Learner by id
@@ -67,7 +77,7 @@ const Welcome = ({ api }) => {
             </p>
             <div>
               <p>
-                {"Learner "+learnerResult.id+": "}
+                {"Learner " + learnerResult.id + ": "}
                 <Link
                   to={{
                     pathname: `/learner/${learnerResult.id}`,
@@ -113,7 +123,7 @@ const Welcome = ({ api }) => {
             </p>
             <div>
               <p>
-                {"ClassBatch "+classbatchResult.id+": "}
+                {"ClassBatch " + classbatchResult.id + ": "}
                 <Link
                   to={{
                     pathname: `/classbatch/${classbatchResult.id}`,

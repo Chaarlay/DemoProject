@@ -18,6 +18,7 @@ const App = ({ api }) => {
           <Route path="/" element={<Welcome />} />
           <Route path="/learner/:learnerId" element={<Learner />} />
           <Route path="/classbatch/:classbatchId" element={<ClassBatch />} />
+          <Route path="/alllearners/" element={<AllLearners />} />
         </Routes>
       </BrowserRouter>
     </section>
