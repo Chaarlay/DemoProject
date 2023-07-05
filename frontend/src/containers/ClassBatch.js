@@ -21,11 +21,11 @@ const ClassBatch = ({ api }) => {
     api
       .fetchClassBatch(params.classbatchId)
       .then((res) => {
-        console.log("Received ClassBatch:",res);
+        console.log("Received ClassBatch:", res);
         setClassBatchResult(res);
       })
       .catch((e) => {
-        console.log("Error fetching ClassBatch: ",e);
+        console.log("Error fetching ClassBatch: ", e);
         setClassBatchResult('No results found...');
       });
   };
@@ -33,6 +33,16 @@ const ClassBatch = ({ api }) => {
   useEffect(() => {
     fetchInfo();
   }, []);
+
+  const handleChange = () => {
+    let x = document.getElementById("cbname");
+    api
+      .updateClassBatch({ "id": x.getAttribute("batch_id"), "name": x.value })
+      .then((res) => {
+        setClassBatchResult(res);
+      })
+
+  };
 
   return (
     <div className="App">
@@ -45,7 +55,7 @@ const ClassBatch = ({ api }) => {
         {classbatchResult && classbatchResult.id && (
           modelFields.map((field) => (
             <div>
-              {field + ": " + classbatchResult[field]}
+              {field + ': ' + classbatchResult[field]}
             </div>
           ))
         )}
@@ -55,6 +65,11 @@ const ClassBatch = ({ api }) => {
           </p>
         )}
       </div>
+      {classbatchResult &&
+        <div>
+          <input id="cbname" name="classbatch_name" batch_id={classbatchResult.id}></input>
+          <button type="button" onClick={handleChange}>change name</button>
+        </div>}
     </div>
   );
 }
